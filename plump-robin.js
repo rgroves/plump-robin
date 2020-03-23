@@ -45,6 +45,46 @@ function ContestantCollector({ onAdd }) {
   );
 }
 
+function ScheduleDetails({ details }) {
+  return (
+    <div>
+      <h3>Schedule Details</h3>
+      {details.map((rounds, i) => {
+        return (
+          <div>
+            <h4 key={i}>Round {i + 1}</h4>
+            {rounds.map((round, i) => {
+              return <div key={i}>{round}</div>;
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ScheduleGenerator({ contestants }) {
+  let [scheduleDetails, setScheduleDetails] = React.useState([]);
+
+  function clickHandler() {
+    if (contestants.length === 0) {
+      return;
+    }
+
+    setScheduleDetails([
+      [["C1 vs C14"], ["C2 vs C13"]],
+      [["C1 vs C13"], ["C14 vs C12"]]
+    ]);
+  }
+
+  return (
+    <div>
+      <button onClick={clickHandler}>Generate Schedule</button>
+      <ScheduleDetails contestants={contestants} details={scheduleDetails} />
+    </div>
+  );
+}
+
 function App() {
   let [contestants, setContestants] = React.useState([]);
 
@@ -61,6 +101,7 @@ function App() {
     <div>
       <ContestantCollector onAdd={addContestant} />
       <ContestantList contestants={contestants} />
+      <ScheduleGenerator contestants={contestants} />
     </div>
   );
 }
