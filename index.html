@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -12,9 +12,31 @@
   <title>Plump Robin - A Round-Robin Tournament Schedule Generator</title>
 </head>
 
-<body>
-  <div id="plump-robin"></div>
-
+<body class="m-5">
+  <div class="d-flex-column">
+    <header class="mb-4">
+      <h1>Plump Robin</h1>
+      <h2>A Round-Robin Tournament Schedule Generator</h2>
+    </header>
+    <main>
+      <div id="plump-robin"></div>
+    </main>
+    <footer>
+      <p>
+        <small class="text-muted">A project built during
+          <a href="https://twitter.com/search?q=%23100daysofcode"></a>#100DaysOfCode.</a></small><br>
+        <small class="text-muted">Created by <a href="https://github.com/rgroves">Robert Groves</a></small><br>
+        <small class="text-muted">This app was created with
+          <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>,
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a>,
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>,
+          <a href="https://getbootstrap.com/">Bootstrap</a>,
+          <a href="https://reactjs.org/">React</a>,
+          and <a href="https://babeljs.io/">Babel</a>
+        </small>.
+      </p>
+    </footer>
+  </div>
   <!-- Load React. -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>

@@ -3,44 +3,87 @@
 const appContainerId = "#plump-robin";
 
 function Contestant({ name }) {
-  return <input type="text" readOnly value={name} />;
+  return name;
 }
 
 function ContestantList({ contestants }) {
   const listItems = contestants.map(contestant => {
     return (
-      <li key={contestant}>
+      <li
+        key={contestant}
+        className="list-group-item disabled ml-4"
+        aria-disabled="true"
+      >
         <Contestant name={contestant} />
       </li>
     );
   });
 
-  return <ul>{listItems}</ul>;
+  return <ul className="list-group mb-4">{listItems}</ul>;
 }
 
 function ContestantCollector({ onAdd }) {
   const [name, setName] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
 
-  function clickHandler() {
+  function addCompetitor() {
     if (name && name.length > 0) {
       if (onAdd(name)) {
+        setName("");
         setFeedback("");
+        document.getElementById("add-competitor-input").focus();
       } else {
         setFeedback(`Contestant ${name} already in list.`);
       }
     }
   }
 
+  function clickHandler(event) {
+    addCompetitor();
+    event.preventDefault();
+  }
+
   function changeHandler(event) {
     setName(event.target.value);
   }
 
+  function submitHandler(event) {
+    addCompetitor();
+    event.preventDefault();
+  }
+
   return (
-    <div>
-      <input type="text" onChange={changeHandler} value={name} />
-      <button onClick={clickHandler}>Add</button>
-      <div>{feedback}</div>
+    <div className="mb-4">
+      <h3>Add a Competitor</h3>
+      <form
+        onSubmit={submitHandler}
+        id="competitor-input-form"
+        className="mb-4"
+      >
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Competitor's Name"
+            aria-describedby="add-competitor-button"
+            aria-label="Competitor's Name"
+            onChange={changeHandler}
+            value={name}
+            id="add-competitor-input"
+          />
+          <div className="input-group-append">
+            <button
+              className="btn btn-outline-secondary"
+              onClick={clickHandler}
+              type="button"
+              id="add-competitor-button"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+        <div>{feedback}</div>
+      </form>
     </div>
   );
 }
@@ -51,10 +94,14 @@ function ScheduleDetails({ details }) {
       <h3>Schedule Details</h3>
       {details.map((rounds, i) => {
         return (
-          <div>
+          <div className="ml-3 mb-3">
             <h4 key={i}>Round {i + 1}</h4>
             {rounds.map((round, i) => {
-              return <div key={i}>{round}</div>;
+              return (
+                <div className="ml-3" key={i}>
+                  {round}
+                </div>
+              );
             })}
           </div>
         );
@@ -78,8 +125,10 @@ function ScheduleGenerator({ contestants }) {
   }
 
   return (
-    <div>
-      <button onClick={clickHandler}>Generate Schedule</button>
+    <div className="mb-4">
+      <button className="mb-4" onClick={clickHandler}>
+        Generate Schedule
+      </button>
       <ScheduleDetails contestants={contestants} details={scheduleDetails} />
     </div>
   );
@@ -165,7 +214,7 @@ function roundRobinScheduler(competitors) {
         const awayIdx = away[i];
         const homeCompetitor = competitors[homeIdx];
         const awayCompetitor = competitors[awayIdx];
-        const match = [`${homeCompetitor}, ${awayCompetitor}`];
+        const match = [`${homeCompetitor} vs ${awayCompetitor}`];
 
         round.push(match);
       }
