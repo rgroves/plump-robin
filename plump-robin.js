@@ -2,19 +2,19 @@
 
 const appContainerId = "#plump-robin";
 
-function Contestant({ name }) {
+function Competitor({ name }) {
   return name;
 }
 
-function ContestantList({ contestants }) {
-  const listItems = contestants.map(contestant => {
+function CompetitorList({ competitors }) {
+  const listItems = competitors.map(competitor => {
     return (
       <li
-        key={contestant}
+        key={competitor}
         className="list-group-item disabled ml-4"
         aria-disabled="true"
       >
-        <Contestant name={contestant} />
+        <Competitor name={competitor} />
       </li>
     );
   });
@@ -22,7 +22,7 @@ function ContestantList({ contestants }) {
   return <ul className="list-group mb-4">{listItems}</ul>;
 }
 
-function ContestantCollector({ onAdd }) {
+function CompetitorCollector({ onAdd }) {
   const [name, setName] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
   const [feedbackDisplay, setFeedbackDisplay] = React.useState("d-none");
@@ -36,7 +36,7 @@ function ContestantCollector({ onAdd }) {
         document.getElementById("add-competitor-input").focus();
       } else {
         setFeedbackDisplay("d-block");
-        setFeedback(`Contestant ${name} already in list.`);
+        setFeedback(`Competitor ${name} already in list.`);
       }
     } else {
       setFeedbackDisplay("d-block");
@@ -120,20 +120,20 @@ function ScheduleDetails({ details }) {
   );
 }
 
-function ScheduleGenerator({ contestants }) {
+function ScheduleGenerator({ competitors }) {
   let [scheduleDetails, setScheduleDetails] = React.useState([]);
   const [feedback, setFeedback] = React.useState("");
   const [feedbackDisplay, setFeedbackDisplay] = React.useState("d-none");
 
   function clickHandler() {
-    if (contestants.length === 0) {
+    if (competitors.length === 0) {
       setFeedback(
         "Please add a few competitors so a schedule can be generated."
       );
 
       setFeedbackDisplay("d-block");
       return;
-    } else if (contestants.length < 3) {
+    } else if (competitors.length < 3) {
       setFeedback(
         "Please add at least three competitors so a schedule can be generated."
       );
@@ -144,7 +144,7 @@ function ScheduleGenerator({ contestants }) {
 
     setFeedbackDisplay("d-none");
 
-    const scheduler = roundRobinScheduler(contestants);
+    const scheduler = roundRobinScheduler(competitors);
     const roundData = scheduler.generateRounds();
 
     setScheduleDetails(roundData);
@@ -163,17 +163,17 @@ function ScheduleGenerator({ contestants }) {
           {feedback}
         </div>
       </div>
-      <ScheduleDetails contestants={contestants} details={scheduleDetails} />
+      <ScheduleDetails competitors={competitors} details={scheduleDetails} />
     </div>
   );
 }
 
 function App() {
-  let [contestants, setContestants] = React.useState([]);
+  let [competitors, setCompetitors] = React.useState([]);
 
-  function addContestant(name) {
-    if (!contestants.includes(name)) {
-      setContestants([...contestants, name]);
+  function addCompetitor(name) {
+    if (!competitors.includes(name)) {
+      setCompetitors([...competitors, name]);
       return true;
     } else {
       return false;
@@ -182,9 +182,9 @@ function App() {
 
   return (
     <div>
-      <ContestantCollector onAdd={addContestant} />
-      <ContestantList contestants={contestants} />
-      <ScheduleGenerator contestants={contestants} />
+      <CompetitorCollector onAdd={addCompetitor} />
+      <CompetitorList competitors={competitors} />
+      <ScheduleGenerator competitors={competitors} />
     </div>
   );
 }
@@ -227,7 +227,7 @@ function roundRobinScheduler(competitorList) {
       const home = [];
       const away = [];
 
-      // Keep the 1st contestant in a fixed position.
+      // Keep the 1st competitor in a fixed position.
       home.push(0);
 
       // Fill in the home competitor indicies using a rotating index.
