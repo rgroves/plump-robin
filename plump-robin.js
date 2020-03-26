@@ -112,11 +112,27 @@ function ScheduleDetails({ details }) {
 
 function ScheduleGenerator({ contestants }) {
   let [scheduleDetails, setScheduleDetails] = React.useState([]);
+  const [feedback, setFeedback] = React.useState("");
+  const [feedbackDisplay, setFeedbackDisplay] = React.useState("d-none");
 
   function clickHandler() {
     if (contestants.length === 0) {
+      setFeedback(
+        "Please add a few competitors so a schedule can be generated."
+      );
+
+      setFeedbackDisplay("d-block");
+      return;
+    } else if (contestants.length < 3) {
+      setFeedback(
+        "Please add at least three competitors so a schedule can be generated."
+      );
+
+      setFeedbackDisplay("d-block");
       return;
     }
+
+    setFeedbackDisplay("d-none");
 
     const scheduler = roundRobinScheduler(contestants);
     const roundData = scheduler.generateRounds();
@@ -132,6 +148,11 @@ function ScheduleGenerator({ contestants }) {
       >
         Generate Schedule
       </button>
+      <div className={feedbackDisplay}>
+        <div className="pl-2 mb-2 alert alert-danger" role="alert">
+          {feedback}
+        </div>
+      </div>
       <ScheduleDetails contestants={contestants} details={scheduleDetails} />
     </div>
   );
