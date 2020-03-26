@@ -160,8 +160,6 @@ const app = React.createElement(App);
 ReactDOM.render(app, domContainer);
 
 function roundRobinScheduler(competitors) {
-  console.log("x1", competitors);
-
   const rounds = competitors.length - 1;
   const firstRotationIdx = 1;
   const lastRotationIdx = competitors.length - 1;
@@ -221,8 +219,6 @@ function roundRobinScheduler(competitors) {
 
       schedule.push(round);
     }
-
-    console.log(schedule);
 
     return schedule;
   }
