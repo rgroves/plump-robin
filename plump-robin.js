@@ -159,10 +159,15 @@ const domContainer = document.querySelector(appContainerId);
 const app = React.createElement(App);
 ReactDOM.render(app, domContainer);
 
-function roundRobinScheduler(competitors) {
-  const rounds = competitors.length - 1;
+function roundRobinScheduler(competitorList) {
+  const competitors = [...competitorList];
+  if (competitors.length % 2 != 0) {
+    competitors.push("BYE");
+  }
+
   const firstRotationIdx = 1;
   const lastRotationIdx = competitors.length - 1;
+  const rounds = competitors.length - 1;
 
   // Create helper function to loop through the competitor indicies.
   const rotatingIndex = ((first, last) => {
