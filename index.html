@@ -12,31 +12,33 @@
   <title>Plump Robin - A Round-Robin Tournament Schedule Generator</title>
 </head>
 
-<body class="m-5">
-  <div class="d-flex-column">
-    <header class="mb-4">
-      <h1>Plump Robin</h1>
-      <h2>A Round-Robin Tournament Schedule Generator</h2>
-    </header>
-    <main>
-      <div id="plump-robin"></div>
-    </main>
-    <footer>
-      <p>
-        <small class="text-muted">A project built during
-          <a href="https://twitter.com/search?q=%23100daysofcode"></a>#100DaysOfCode.</a></small><br>
-        <small class="text-muted">Created by <a href="https://github.com/rgroves">Robert Groves</a></small><br>
-        <small class="text-muted">This app was created with
-          <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>,
-          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a>,
-          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>,
-          <a href="https://getbootstrap.com/">Bootstrap</a>,
-          <a href="https://reactjs.org/">React</a>,
-          and <a href="https://babeljs.io/">Babel</a>
-        </small>.
-      </p>
-    </footer>
-  </div>
+<body>
+  <header class="p-3 mb-2 bg-primary text-white">
+    <h1>Plump Robin</h1>
+    <h2>A Round-Robin Tournament Schedule Generator</h2>
+  </header>
+  <main class="p-3" style="margin-bottom: 7.25rem">
+    <div id="plump-robin"></div>
+  </main>
+  <footer class="p-3 mb-2 bg-dark text-info fixed-bottom">
+    <p>
+      <small>A project built during
+        <a class="badge badge-pill badge-secondary"
+          href="https://twitter.com/search?q=%23100daysofcode">#100DaysOfCode.</a></small><br>
+      <small>Created by <a class="badge badge-pill badge-secondary" href="https://github.com/rgroves">Robert
+          Groves</a></small><br>
+      <small>Created with 💖 and
+        <a class="badge badge-pill badge-secondary" href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>,
+        <a class="badge badge-pill badge-secondary" href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a>,
+        <a class="badge badge-pill badge-secondary"
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>,
+        <a class="badge badge-pill badge-secondary" href="https://getbootstrap.com/">Bootstrap</a>,
+        <a class="badge badge-pill badge-secondary" href="https://reactjs.org/">React</a>,
+        <a class="badge badge-pill badge-secondary" href="https://babeljs.io/">Babel</a>
+      </small>
+    </p>
+  </footer>
+
   <!-- Load React. -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
