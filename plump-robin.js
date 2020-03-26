@@ -126,7 +126,10 @@ function ScheduleGenerator({ contestants }) {
 
   return (
     <div className="mb-4">
-      <button className="mb-4" onClick={clickHandler}>
+      <button
+        className="btn btn-primary btn-lg btn-block mb-4"
+        onClick={clickHandler}
+      >
         Generate Schedule
       </button>
       <ScheduleDetails contestants={contestants} details={scheduleDetails} />
