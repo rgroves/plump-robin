@@ -90,7 +90,7 @@ function ContestantCollector({ onAdd }) {
 
 function ScheduleDetails({ details }) {
   return (
-    <div>
+    <div className="pl-2 mt-2">
       <h3>Schedule Details</h3>
       {details.map((rounds, i) => {
         return (
@@ -125,9 +125,9 @@ function ScheduleGenerator({ contestants }) {
   }
 
   return (
-    <div className="mb-4">
+    <div className="mb-2">
       <button
-        className="btn btn-primary btn-lg btn-block mb-4"
+        className="btn btn-primary btn-lg btn-block"
         onClick={clickHandler}
       >
         Generate Schedule
