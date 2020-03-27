@@ -7,8 +7,8 @@ function ScheduleDetails({ details }) {
       <div className="d-flex flex-wrap justify-content-center">
         {details.map((rounds, i) => {
           return (
-            <div className="ml-3 mb-3 p-2 bg-light rounded">
-              <h4 key={i}>Round {i + 1}</h4>
+            <div key={i} className="ml-3 mb-3 p-2 bg-light rounded">
+              <h4>Round {i + 1}</h4>
               <hr />
               {rounds.map((round, i) => {
                 return (
