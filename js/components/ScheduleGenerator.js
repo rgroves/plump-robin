@@ -33,7 +33,7 @@ function ScheduleGenerator({ competitors }) {
   return (
     <div className="mb-2">
       <button
-        className="btn btn-primary btn-lg btn-block"
+        className="mb-4 btn btn-primary btn-lg btn-block"
         onClick={clickHandler}
       >
         Generate Schedule

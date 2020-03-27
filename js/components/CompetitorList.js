@@ -1,17 +1,18 @@
 "use strict";
 
 function CompetitorList({ competitors }) {
+  let i = 1;
   const listItems = competitors.map(competitor => {
     return (
-      <li
-        key={competitor}
-        className="list-group-item disabled ml-4"
-        aria-disabled="true"
-      >
-        {competitor}
-      </li>
+      <div key={competitor} className="badge badge-light" aria-disabled="true">
+        <span style={{ fontSize: "medium" }}>{competitor}</span>
+      </div>
     );
   });
 
-  return <ul className="list-group mb-4">{listItems}</ul>;
+  return (
+    <div className="mb-4 d-flex flex-wrap justify-content-around">
+      {listItems}
+    </div>
+  );
 }
