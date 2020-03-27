@@ -7,19 +7,22 @@ function CompetitorCollector({ onAdd }) {
 
   function addCompetitor() {
     if (name && name.length > 0) {
-      if (onAdd(name)) {
+      const feedback = onAdd(name);
+
+      if (feedback.length == 0) {
         setName("");
         setFeedback("");
         setFeedbackDisplay("d-none");
-        document.getElementById("add-competitor-input").focus();
       } else {
         setFeedbackDisplay("d-block");
-        setFeedback(`Competitor ${name} already in list.`);
+        setFeedback(feedback);
       }
     } else {
       setFeedbackDisplay("d-block");
       setFeedback(`Please enter the name of a competitor.`);
     }
+
+    document.getElementById("add-competitor-input").focus();
   }
 
   function clickHandler(event) {
