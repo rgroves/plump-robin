@@ -4,22 +4,30 @@ function App() {
   let [competitors, setCompetitors] = React.useState([]);
 
   function addCompetitor(name) {
-    const names = name.split(",").filter(curName => curName.length > 0);
+    const names = name
+      .split(",")
+      .map(curName => curName.trim())
+      .filter(curName => curName.length > 0);
+
     const newNames = [];
     const duplicateNames = [];
 
+    function nameInArray(arr, name) {
+      return arr.some(value => value.toLowerCase() === name.toLowerCase());
+    }
+
     names.forEach(curName => {
       if (curName.trim().length > 0) {
-        if (!competitors.includes(curName)) {
-          if (!newNames.includes(curName)) {
+        if (!nameInArray(competitors, curName)) {
+          if (!nameInArray(newNames, curName)) {
             newNames.push(curName);
           } else {
-            if (!duplicateNames.includes(curName)) {
+            if (!nameInArray(duplicateNames, curName)) {
               duplicateNames.push(curName);
             }
           }
         } else {
-          if (!duplicateNames.includes(curName)) {
+          if (!nameInArray(duplicateNames, curName)) {
             duplicateNames.push(curName);
           }
         }
