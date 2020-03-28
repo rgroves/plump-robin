@@ -60,8 +60,10 @@ function App() {
 
   return (
     <div>
-      <CompetitorCollector onAdd={addCompetitor} />
-      <CompetitorList competitors={competitors} />
+      <div className="d-flex flex-wrap">
+        <CompetitorCollector onAdd={addCompetitor} />
+        <CompetitorList competitors={competitors} />
+      </div>
       <ScheduleGenerator competitors={competitors} />
     </div>
   );

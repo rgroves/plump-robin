@@ -40,41 +40,43 @@ function CompetitorCollector({ onAdd }) {
   }
 
   return (
-    <div className="mb-4">
-      <h3>Add a Competitor</h3>
-      <form
-        onSubmit={submitHandler}
-        id="competitor-input-form"
-        className="mb-4"
-      >
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Competitor's Name"
-            aria-describedby="add-competitor-button"
-            aria-label="Competitor's Name"
-            onChange={changeHandler}
-            value={name}
-            id="add-competitor-input"
-          />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              onClick={clickHandler}
-              type="button"
-              id="add-competitor-button"
-            >
-              Add
-            </button>
+    <div className="mb-4 d-flex flex-column justify-content-center">
+      <h3 className="align-self-center">Add Competitors</h3>
+      <div className="d-flex">
+        <form
+          onSubmit={submitHandler}
+          id="competitor-input-form"
+          className="mb-4"
+        >
+          <div className="input-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Competitor's Name"
+              aria-describedby="add-competitor-button"
+              aria-label="Competitor's Name"
+              onChange={changeHandler}
+              value={name}
+              id="add-competitor-input"
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                onClick={clickHandler}
+                type="button"
+                id="add-competitor-button"
+              >
+                Add
+              </button>
+            </div>
           </div>
-        </div>
-        <div className={feedbackDisplay}>
-          <div className="pl-2 mb-2 alert alert-danger" role="alert">
-            {feedback}
+          <div className={feedbackDisplay}>
+            <div className="pl-2 mb-2 alert alert-danger" role="alert">
+              {feedback}
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

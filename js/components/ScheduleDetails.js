@@ -2,8 +2,8 @@
 
 function ScheduleDetails({ details }) {
   return (
-    <div className="pl-2 mt-2">
-      <h3>Schedule Details</h3>
+    <div className="pl-2 mt-2 d-flex flex-column justify-content-center">
+      <h3 className="align-self-center">Schedule Details</h3>
       <div className="d-flex flex-wrap justify-content-center">
         {details.map((rounds, i) => {
           return (
