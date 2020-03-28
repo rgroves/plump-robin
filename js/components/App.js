@@ -9,6 +9,10 @@ function App() {
       .map(curName => curName.trim())
       .filter(curName => curName.length > 0);
 
+    if (names.length === 0) {
+      return "Please enter the name of a competitor.";
+    }
+
     const newNames = [];
     const duplicateNames = [];
 
