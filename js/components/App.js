@@ -3,6 +3,11 @@
 function App() {
   let [competitors, setCompetitors] = React.useState([]);
 
+  function removeCompetitor(name) {
+    const newCompetitors = competitors.filter(curName => curName != name);
+    setCompetitors(newCompetitors);
+  }
+
   function resetCompetitors() {
     setCompetitors([]);
   }
@@ -66,7 +71,7 @@ function App() {
     <div>
       <div className="d-flex flex-wrap">
         <CompetitorCollector onAdd={addCompetitor} onReset={resetCompetitors} />
-        <CompetitorList competitors={competitors} />
+        <CompetitorList competitors={competitors} onRemove={removeCompetitor} />
       </div>
       <ScheduleGenerator competitors={competitors} />
     </div>
