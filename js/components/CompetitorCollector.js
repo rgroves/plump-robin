@@ -1,6 +1,6 @@
 "use strict";
 
-function CompetitorCollector({ onAdd }) {
+function CompetitorCollector({ onAdd, onReset }) {
   const [name, setName] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
   const [feedbackDisplay, setFeedbackDisplay] = React.useState("d-none");
@@ -39,6 +39,15 @@ function CompetitorCollector({ onAdd }) {
     event.preventDefault();
   }
 
+  function clickResetHandler(event) {
+    onReset();
+    setName("");
+    setFeedback("");
+    setFeedbackDisplay("d-none");
+    document.getElementById("add-competitor-input").focus();
+    event.preventDefault();
+  }
+
   return (
     <div className="mb-4 d-flex flex-column justify-content-center">
       <h3 className="align-self-center">Add Competitors</h3>
@@ -67,6 +76,16 @@ function CompetitorCollector({ onAdd }) {
                 id="add-competitor-button"
               >
                 Add
+              </button>
+            </div>
+            <div className="pl-1 input-group-append">
+              <button
+                className="btn btn-danger"
+                onClick={clickResetHandler}
+                type="button"
+                id="reset-button"
+              >
+                Reset
               </button>
             </div>
           </div>

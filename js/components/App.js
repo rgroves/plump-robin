@@ -3,6 +3,10 @@
 function App() {
   let [competitors, setCompetitors] = React.useState([]);
 
+  function resetCompetitors() {
+    setCompetitors([]);
+  }
+
   function addCompetitor(name) {
     const names = name
       .split(",")
@@ -61,7 +65,7 @@ function App() {
   return (
     <div>
       <div className="d-flex flex-wrap">
-        <CompetitorCollector onAdd={addCompetitor} />
+        <CompetitorCollector onAdd={addCompetitor} onReset={resetCompetitors} />
         <CompetitorList competitors={competitors} />
       </div>
       <ScheduleGenerator competitors={competitors} />
