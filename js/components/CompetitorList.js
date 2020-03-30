@@ -8,7 +8,7 @@ function CompetitorList({ competitors, onRemove }) {
     onRemove(name);
   }
 
-  const listItems = competitors.map(competitor => {
+  const listItems = [...competitors].map(competitor => {
     return (
       <div key={competitor} className="badge badge-light m-1 p-2">
         <button

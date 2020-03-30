@@ -1,15 +1,15 @@
 "use strict";
 
 function App() {
-  let [competitors, setCompetitors] = React.useState([]);
+  let [competitors, setCompetitors] = React.useState(new Set());
 
   function removeCompetitor(name) {
-    const newCompetitors = competitors.filter(curName => curName != name);
-    setCompetitors(newCompetitors);
+    competitors.delete(name);
+    setCompetitors(new Set(competitors));
   }
 
   function resetCompetitors() {
-    setCompetitors([]);
+    setCompetitors(new Set());
   }
 
   function addCompetitor(name) {
@@ -22,49 +22,22 @@ function App() {
       return "Please enter the name of a competitor.";
     }
 
-    const newNames = [];
-    const duplicateNames = [];
+    const namesToAdd = new Set(names);
+    const newNames = new Set([...competitors, ...namesToAdd]);
+    const newNamesAdded = newNames.size > competitors.size;
+    const hadDuplicates = newNames.size < competitors.size + names.length;
 
-    function nameInArray(arr, name) {
-      return arr.some(value => value.toLowerCase() === name.toLowerCase());
+    if (newNamesAdded) {
+      setCompetitors(newNames);
     }
 
-    names.forEach(curName => {
-      if (curName.trim().length > 0) {
-        if (!nameInArray(competitors, curName)) {
-          if (!nameInArray(newNames, curName)) {
-            newNames.push(curName);
-          } else {
-            if (!nameInArray(duplicateNames, curName)) {
-              duplicateNames.push(curName);
-            }
-          }
-        } else {
-          if (!nameInArray(duplicateNames, curName)) {
-            duplicateNames.push(curName);
-          }
-        }
-      }
-    });
-
-    let feedback = "";
-
-    if (duplicateNames.length > 0) {
-      if (newNames.length > 0) {
-        feedback = "New names added. ";
-      }
-
-      feedback +=
-        duplicateNames.length === 1 && names.length === 1
-          ? "Duplicate names are not allowed."
-          : "Duplicate names are not allowed: " + duplicateNames.join(", ");
+    if (newNamesAdded && hadDuplicates) {
+      return "New names added. Duplicate names were ignored.";
+    } else if (hadDuplicates) {
+      return "Duplicate names are not allowed.";
+    } else {
+      return "";
     }
-
-    if (newNames.length > 0) {
-      setCompetitors([...competitors, ...newNames]);
-    }
-
-    return feedback;
   }
 
   return (

@@ -6,14 +6,14 @@ function ScheduleGenerator({ competitors }) {
   const [feedbackDisplay, setFeedbackDisplay] = React.useState("d-none");
 
   function clickHandler() {
-    if (competitors.length === 0) {
+    if (competitors.size === 0) {
       setFeedback(
         "Please add a few competitors so a schedule can be generated."
       );
 
       setFeedbackDisplay("d-block");
       return;
-    } else if (competitors.length < 3) {
+    } else if (competitors.size < 3) {
       setFeedback(
         "Please add at least three competitors so a schedule can be generated."
       );
@@ -24,7 +24,7 @@ function ScheduleGenerator({ competitors }) {
 
     setFeedbackDisplay("d-none");
 
-    const scheduler = roundRobinScheduler(competitors);
+    const scheduler = roundRobinScheduler([...competitors]);
     const roundData = scheduler.generateRounds();
 
     setScheduleDetails(roundData);
@@ -43,7 +43,7 @@ function ScheduleGenerator({ competitors }) {
           {feedback}
         </div>
       </div>
-      <ScheduleDetails competitors={competitors} details={scheduleDetails} />
+      <ScheduleDetails details={scheduleDetails} />
     </div>
   );
 }
