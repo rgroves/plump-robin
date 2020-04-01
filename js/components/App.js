@@ -4,14 +4,18 @@ function App() {
   let [competitors, setCompetitors] = React.useState(new Set());
   let [scheduleDetails, setScheduleDetails] = React.useState([]);
 
+  function refreshCompetitors(newCompetitors) {
+    setCompetitors(newCompetitors);
+    generateSchedule(newCompetitors);
+  }
+
   function removeCompetitor(name) {
     competitors.delete(name);
-    setCompetitors(new Set(competitors));
+    refreshCompetitors(new Set(competitors));
   }
 
   function resetCompetitors() {
-    setCompetitors(new Set());
-    setScheduleDetails([]);
+    refreshCompetitors(new Set());
   }
 
   function addCompetitor(name) {
@@ -30,7 +34,7 @@ function App() {
     const hadDuplicates = newNames.size < competitors.size + names.length;
 
     if (newNamesAdded) {
-      setCompetitors(newNames);
+      refreshCompetitors(newNames);
     }
 
     if (newNamesAdded && hadDuplicates) {
@@ -42,9 +46,9 @@ function App() {
     }
   }
 
-  function generateSchedule() {
-    if (competitors.size >= 3) {
-      const scheduler = roundRobinScheduler(competitors);
+  function generateSchedule(tourneyCompetitors) {
+    if (tourneyCompetitors.size >= 3) {
+      const scheduler = roundRobinScheduler(tourneyCompetitors);
       const roundData = scheduler.generateRounds();
       setScheduleDetails(roundData);
     } else {
@@ -53,16 +57,10 @@ function App() {
   }
 
   return (
-    <div>
-      <div className="d-flex flex-wrap">
-        <CompetitorCollector onAdd={addCompetitor} onReset={resetCompetitors} />
-        <CompetitorList competitors={competitors} onRemove={removeCompetitor} />
-      </div>
-      <ScheduleGenerator
-        competitors={competitors}
-        scheduleDetails={scheduleDetails}
-        onGenerate={generateSchedule}
-      />
+    <div className="d-flex flex-wrap flex-column align-items-center">
+      <CompetitorCollector onAdd={addCompetitor} onReset={resetCompetitors} />
+      <CompetitorList competitors={competitors} onRemove={removeCompetitor} />
+      <ScheduleDetails details={scheduleDetails} />
     </div>
   );
 }
