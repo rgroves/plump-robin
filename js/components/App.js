@@ -2,6 +2,7 @@
 
 function App() {
   let [competitors, setCompetitors] = React.useState(new Set());
+  let [scheduleDetails, setScheduleDetails] = React.useState([]);
 
   function removeCompetitor(name) {
     competitors.delete(name);
@@ -10,6 +11,7 @@ function App() {
 
   function resetCompetitors() {
     setCompetitors(new Set());
+    setScheduleDetails([]);
   }
 
   function addCompetitor(name) {
@@ -40,13 +42,27 @@ function App() {
     }
   }
 
+  function generateSchedule() {
+    if (competitors.size >= 3) {
+      const scheduler = roundRobinScheduler(competitors);
+      const roundData = scheduler.generateRounds();
+      setScheduleDetails(roundData);
+    } else {
+      setScheduleDetails([]);
+    }
+  }
+
   return (
     <div>
       <div className="d-flex flex-wrap">
         <CompetitorCollector onAdd={addCompetitor} onReset={resetCompetitors} />
         <CompetitorList competitors={competitors} onRemove={removeCompetitor} />
       </div>
-      <ScheduleGenerator competitors={competitors} />
+      <ScheduleGenerator
+        competitors={competitors}
+        scheduleDetails={scheduleDetails}
+        onGenerate={generateSchedule}
+      />
     </div>
   );
 }
